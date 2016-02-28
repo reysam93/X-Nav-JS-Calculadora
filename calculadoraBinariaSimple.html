@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html>
    <head>
-     <script type="text/javascript" charset="utf-8">
+     <title>Ejercicio 5.5.10</title>
+     <link rel="stylesheet" type="text/css" href="/calc.css"/>
+   </head>
+   <body>
+   <p id="display"></p>
+   <div id="buttons">
+   		<input type="button" id="zero" value="0">
+   		<input type="button" id="one" value="1">
+   		<input type="button" id="add" value="+">
+   		<input type="button" id="equal" value="=">
+   </div>
+
+   <script type="text/javascript" charset="utf-8">
         var sum1 = "";
         var sum2 = "";
+
+        var zeroButton = document.getElementById("zero");
+        var oneButton = document.getElementById("one");
+        var addButton = document.getElementById("add");
+        var equalButton = document.getElementById("equal");
+
+        zeroButton.addEventListener("click", addZero, false);
+	    oneButton.addEventListener("click", addOne, false);
+	    addButton.addEventListener("click", getSum1, false);
+	    equalButton.addEventListener("click", result, false);
+
         function addZero(){
           var display = document.getElementById('display');
           display.innerHTML = "0";
@@ -14,28 +37,29 @@
         }
         function getSum1(){
           var display = document.getElementById('display');
+          if (display.innerHTML == ""){
+          	return;
+          }
           sum1 = display.innerHTML;
           display.innerHTML = "";
         }
         function result(){
           var display = document.getElementById('display');
           sum2 = display.innerHTML;
+
+          if (sum1 == "" || sum2 == ""){
+          	return;
+          }
           var result = parseInt(sum1) + parseInt(sum2);
           
           if (result == 2){
             result = 0;
           }
           display.innerHTML = result.toString(/*2*/);
+          sum1 = result;
+          sum2 = "";
         }
      </script>
-     <title>Ejercicio 5.5.10</title>
-   </head>
-   <body>
-   <p>Calculadora Binaria!
-   <p id="display"></p>
-   <p><a href="javascript:addZero()">  0  </a>
-      <a href="javascript:addOne()">  1  </a>
-      <a href="javascript:getSum1()">  +  </a>
-      <a href="javascript:result()">  =  </a></p>
+
    </body>
 </html>
